@@ -166,7 +166,7 @@ class Rating extends React.PureComponent {
         <thead />
         <tfoot />
         <tbody>
-          {anchors && (
+          {anchors.length && (
             <tr>
               <td colSpan={`${totalSymbols}`}>
                 <div style={{ textAlign: 'center' }}>

@@ -38,9 +38,10 @@ class RatingAPILayer extends React.PureComponent {
   }
 
   handleHover(displayValue) {
-    const value = displayValue === undefined
-      ? displayValue
-      : this.translateDisplayValueToValue(displayValue);
+    const value =
+      displayValue === undefined
+        ? displayValue
+        : this.translateDisplayValueToValue(displayValue);
     this.props.onHover(value);
   }
 
@@ -70,7 +71,8 @@ class RatingAPILayer extends React.PureComponent {
       fractions,
       direction,
       start,
-      stop
+      stop,
+      anchors
     } = this.props;
 
     function calculateTotalSymbols(start, stop, step) {
@@ -81,7 +83,9 @@ class RatingAPILayer extends React.PureComponent {
       <Rating
         totalSymbols={calculateTotalSymbols(start, stop, step)}
         value={this.tranlateValueToDisplayValue(this.state.value)}
-        placeholderValue={this.tranlateValueToDisplayValue(this.props.placeholderRating)}
+        placeholderValue={this.tranlateValueToDisplayValue(
+          this.props.placeholderRating
+        )}
         readonly={readonly}
         quiet={quiet}
         fractions={fractions}
@@ -91,6 +95,7 @@ class RatingAPILayer extends React.PureComponent {
         placeholderSymbol={placeholderSymbol}
         onClick={this.handleClick}
         onHover={this.handleHover}
+        anchors={anchors}
       />
     );
   }
@@ -108,52 +113,72 @@ RatingAPILayer.defaultProps = {
   onHover: noop,
   emptySymbol: Style.empty,
   fullSymbol: Style.full,
-  placeholderSymbol: Style.placeholder
+  placeholderSymbol: Style.placeholder,
+  anchors: []
 };
 
 // Define propTypes only in development.
-RatingAPILayer.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
-  start: PropTypes.number,
-  stop: PropTypes.number,
-  step: PropTypes.number,
-  initialRating: PropTypes.number,
-  placeholderRating: PropTypes.number,
-  readonly: PropTypes.bool,
-  quiet: PropTypes.bool,
-  fractions: PropTypes.number,
-  direction: PropTypes.string,
-  emptySymbol: PropTypes.oneOfType([
-    // Array of class names and/or style objects.
-    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.element])),
-    // Class names.
-    PropTypes.string,
-    // Style objects.
-    PropTypes.object,
-    // React element
-    PropTypes.element
-  ]),
-  fullSymbol: PropTypes.oneOfType([
-    // Array of class names and/or style objects.
-    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.element])),
-    // Class names.
-    PropTypes.string,
-    // Style objects.
-    PropTypes.object,
-    // React element
-    PropTypes.element
-  ]),
-  placeholderSymbol: PropTypes.oneOfType([
-    // Array of class names and/or style objects.
-    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.element])),
-    // Class names.
-    PropTypes.string,
-    // Style objects.
-    PropTypes.object,
-    // React element
-    PropTypes.element
-  ]),
-  onHover: PropTypes.func,
-  onChange: PropTypes.func
-};
+RatingAPILayer.propTypes = typeof __DEV__ !== 'undefined' &&
+  __DEV__ && {
+    start: PropTypes.number,
+    stop: PropTypes.number,
+    step: PropTypes.number,
+    initialRating: PropTypes.number,
+    placeholderRating: PropTypes.number,
+    readonly: PropTypes.bool,
+    quiet: PropTypes.bool,
+    fractions: PropTypes.number,
+    direction: PropTypes.string,
+    emptySymbol: PropTypes.oneOfType([
+      // Array of class names and/or style objects.
+      PropTypes.arrayOf(
+        PropTypes.oneOfType([
+          PropTypes.string,
+          PropTypes.object,
+          PropTypes.element
+        ])
+      ),
+      // Class names.
+      PropTypes.string,
+      // Style objects.
+      PropTypes.object,
+      // React element
+      PropTypes.element
+    ]),
+    fullSymbol: PropTypes.oneOfType([
+      // Array of class names and/or style objects.
+      PropTypes.arrayOf(
+        PropTypes.oneOfType([
+          PropTypes.string,
+          PropTypes.object,
+          PropTypes.element
+        ])
+      ),
+      // Class names.
+      PropTypes.string,
+      // Style objects.
+      PropTypes.object,
+      // React element
+      PropTypes.element
+    ]),
+    placeholderSymbol: PropTypes.oneOfType([
+      // Array of class names and/or style objects.
+      PropTypes.arrayOf(
+        PropTypes.oneOfType([
+          PropTypes.string,
+          PropTypes.object,
+          PropTypes.element
+        ])
+      ),
+      // Class names.
+      PropTypes.string,
+      // Style objects.
+      PropTypes.object,
+      // React element
+      PropTypes.element
+    ]),
+    onHover: PropTypes.func,
+    onChange: PropTypes.func
+  };
 
 export default RatingAPILayer;
