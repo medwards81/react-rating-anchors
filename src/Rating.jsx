@@ -107,7 +107,8 @@ class Rating extends React.PureComponent {
       direction,
       emptySymbol,
       fullSymbol,
-      placeholderSymbol
+      placeholderSymbol,
+      anchors
     } = this.props;
     const { displayValue, interacting } = this.state;
     const symbolNodes = [];
@@ -162,15 +163,17 @@ class Rating extends React.PureComponent {
 
     return (
       <table cellpadding="0" style={{ borderCollapse: 'collapse' }}>
-        <tr>
-          <td colSpan={`${totalSymbols}`}>
-            <div style={{ textAlign: 'center' }}>
-              <span style={{ float: 'left' }}>{anchors[0]}</span>
-              {ancchors[1]}
-              <span style={{ float: 'right' }}>{anchors[2]}</span>
-            </div>
-          </td>
-        </tr>
+        {anchors && (
+          <tr>
+            <td colSpan={`${totalSymbols}`}>
+              <div style={{ textAlign: 'center' }}>
+                <span style={{ float: 'left' }}>{anchors[0]}</span>
+                {ancchors[1]}
+                <span style={{ float: 'right' }}>{anchors[2]}</span>
+              </div>
+            </td>
+          </tr>
+        )}
         <tr>
           <td colSpan={`${totalSymbols}`} align="center">
             <span
@@ -246,7 +249,8 @@ Rating.propTypes = typeof __DEV__ !== 'undefined' &&
       PropTypes.element
     ]),
     onClick: PropTypes.func.isRequired,
-    onHover: PropTypes.func.isRequired
+    onHover: PropTypes.func.isRequired,
+    anchors: PropTypes.array
   };
 
 export default Rating;
