@@ -24,16 +24,17 @@ class Rating extends React.PureComponent {
   componentWillReceiveProps(nextProps) {
     const valueChanged = this.props.value !== nextProps.value;
     this.setState({
-      dirty: valueChanged && !this.state.dirty
-        ? true
-        : this.state.dirty,
+      dirty: valueChanged && !this.state.dirty ? true : this.state.dirty,
       displayValue: valueChanged ? nextProps.value : this.state.displayValue
     });
   }
 
   componentDidUpdate(prevProps, prevState) {
     // Ensure we do not call this.props.onHover on clicks or on mouseLeave
-    if (prevState.displayValue !== this.state.displayValue && this.state.interacting) {
+    if (
+      prevState.displayValue !== this.state.displayValue &&
+      this.state.interacting
+    ) {
       this.props.onHover(this.state.displayValue);
     }
   }
@@ -67,26 +68,30 @@ class Rating extends React.PureComponent {
   calculateDisplayValue(symbolIndex, event) {
     const percentage = this.calculateHoverPercentage(event);
     // Get the closest top fraction.
-    const fraction = Math.ceil(percentage % 1 * this.props.fractions) / this.props.fractions;
+    const fraction =
+      Math.ceil((percentage % 1) * this.props.fractions) / this.props.fractions;
     // Truncate decimal trying to avoid float precission issues.
     const precision = 10 ** 3;
     const displayValue =
-      symbolIndex + (Math.floor(percentage) + Math.floor(fraction * precision) / precision);
+      symbolIndex +
+      (Math.floor(percentage) + Math.floor(fraction * precision) / precision);
     // ensure the returned value is greater than 0
     return displayValue > 0 ? displayValue : 1 / this.props.fractions;
   }
 
   calculateHoverPercentage(event) {
-    const clientX = event.nativeEvent.type.indexOf("touch") > -1
-      ? event.nativeEvent.type.indexOf("touchend") > -1
-        ? event.changedTouches[0].clientX
-        : event.touches[0].clientX
-      : event.clientX;
+    const clientX =
+      event.nativeEvent.type.indexOf('touch') > -1
+        ? event.nativeEvent.type.indexOf('touchend') > -1
+          ? event.changedTouches[0].clientX
+          : event.touches[0].clientX
+        : event.clientX;
 
     const targetRect = event.target.getBoundingClientRect();
-    const delta = this.props.direction === 'rtl'
-      ? targetRect.right - clientX
-      : clientX - targetRect.left;
+    const delta =
+      this.props.direction === 'rtl'
+        ? targetRect.right - clientX
+        : clientX - targetRect.left;
 
     // Returning 0 if the delta is negative solves the flickering issue
     return delta < 0 ? 0 : delta / targetRect.width;
@@ -110,9 +115,7 @@ class Rating extends React.PureComponent {
     const full = [].concat(fullSymbol);
     const placeholder = [].concat(placeholderSymbol);
     const shouldDisplayPlaceholder =
-      placeholderValue !== undefined &&
-      value === 0 &&
-      !interacting;
+      placeholderValue !== undefined && value === 0 && !interacting;
 
     // The value that will be used as base for calculating how to render the symbols
     let renderedValue;
@@ -137,77 +140,109 @@ class Rating extends React.PureComponent {
       }
 
       symbolNodes.push(
-        <Symbol
-          key={i}
-          index={i}
-          readonly={readonly}
-          inactiveIcon={empty[i % empty.length]}
-          activeIcon={
-            shouldDisplayPlaceholder ? placeholder[i % full.length] : full[i % full.length]
-          }
-          percent={percent}
-          onClick={!readonly ? this.symbolClick : noop}
-          onMouseMove={!readonly ? this.symbolMouseMove : noop}
-          onTouchMove={!readonly ? this.symbolMouseMove : noop}
-          onTouchEnd={!readonly ? this.symbolClick : noop}
-          direction={direction}
-        />
+        <td>
+          <Symbol
+            key={i}
+            index={i}
+            readonly={readonly}
+            inactiveIcon={empty[i % empty.length]}
+            activeIcon={
+              shouldDisplayPlaceholder
+                ? placeholder[i % full.length]
+                : full[i % full.length]
+            }
+            percent={percent}
+            onClick={!readonly ? this.symbolClick : noop}
+            onMouseMove={!readonly ? this.symbolMouseMove : noop}
+            onTouchMove={!readonly ? this.symbolMouseMove : noop}
+            onTouchEnd={!readonly ? this.symbolClick : noop}
+            direction={direction}
+          />
+        </td>
       );
     }
 
     return (
-      <span
-        style={{ display: 'inline-block', direction }}
-        onMouseEnter={!readonly ? this.onMouseEnter : noop}
-        onMouseLeave={!readonly ? this.onMouseLeave : noop}
-      >
-        {symbolNodes}
-      </span>
+      <table>
+        <tr>
+          <td colSpan={`${totalSymbols}`}>
+            <div style={{ textAlign: 'center' }}>Marc</div>
+          </td>
+        </tr>
+        <tr>
+          <span
+            style={{ display: 'inline-block', direction }}
+            onMouseEnter={!readonly ? this.onMouseEnter : noop}
+            onMouseLeave={!readonly ? this.onMouseLeave : noop}
+          >
+            {symbolNodes}
+          </span>
+        </tr>
+      </table>
     );
   }
 }
 
 // Define propTypes only in development.
-Rating.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
-  totalSymbols: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired, // Always >= 0
-  placeholderValue: PropTypes.number.isRequired,
-  readonly: PropTypes.bool.isRequired,
-  quiet: PropTypes.bool.isRequired,
-  fractions: PropTypes.number.isRequired,
-  direction: PropTypes.string.isRequired,
-  emptySymbol: PropTypes.oneOfType([
-    // Array of class names and/or style objects.
-    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.element])),
-    // Class names.
-    PropTypes.string,
-    // Style objects.
-    PropTypes.object,
-    // React element
-    PropTypes.element
-  ]).isRequired,
-  fullSymbol: PropTypes.oneOfType([
-    // Array of class names and/or style objects.
-    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.element])),
-    // Class names.
-    PropTypes.string,
-    // Style objects.
-    PropTypes.object,
-    // React element
-    PropTypes.element
-  ]).isRequired,
-  placeholderSymbol: PropTypes.oneOfType([
-    // Array of class names and/or style objects.
-    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.element])),
-    // Class names.
-    PropTypes.string,
-    // Style objects.
-    PropTypes.object,
-    // React element
-    PropTypes.element
-  ]),
-  onClick: PropTypes.func.isRequired,
-  onHover: PropTypes.func.isRequired
-};
+Rating.propTypes = typeof __DEV__ !== 'undefined' &&
+  __DEV__ && {
+    totalSymbols: PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired, // Always >= 0
+    placeholderValue: PropTypes.number.isRequired,
+    readonly: PropTypes.bool.isRequired,
+    quiet: PropTypes.bool.isRequired,
+    fractions: PropTypes.number.isRequired,
+    direction: PropTypes.string.isRequired,
+    emptySymbol: PropTypes.oneOfType([
+      // Array of class names and/or style objects.
+      PropTypes.arrayOf(
+        PropTypes.oneOfType([
+          PropTypes.string,
+          PropTypes.object,
+          PropTypes.element
+        ])
+      ),
+      // Class names.
+      PropTypes.string,
+      // Style objects.
+      PropTypes.object,
+      // React element
+      PropTypes.element
+    ]).isRequired,
+    fullSymbol: PropTypes.oneOfType([
+      // Array of class names and/or style objects.
+      PropTypes.arrayOf(
+        PropTypes.oneOfType([
+          PropTypes.string,
+          PropTypes.object,
+          PropTypes.element
+        ])
+      ),
+      // Class names.
+      PropTypes.string,
+      // Style objects.
+      PropTypes.object,
+      // React element
+      PropTypes.element
+    ]).isRequired,
+    placeholderSymbol: PropTypes.oneOfType([
+      // Array of class names and/or style objects.
+      PropTypes.arrayOf(
+        PropTypes.oneOfType([
+          PropTypes.string,
+          PropTypes.object,
+          PropTypes.element
+        ])
+      ),
+      // Class names.
+      PropTypes.string,
+      // Style objects.
+      PropTypes.object,
+      // React element
+      PropTypes.element
+    ]),
+    onClick: PropTypes.func.isRequired,
+    onHover: PropTypes.func.isRequired
+  };
 
 export default Rating;
