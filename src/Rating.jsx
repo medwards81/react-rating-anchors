@@ -162,7 +162,7 @@ class Rating extends React.PureComponent {
     }
 
     return (
-      <table cellpadding="0" style={{ borderCollapse: 'collapse' }}>
+      <table cellPadding="0" style={{ borderCollapse: 'collapse' }}>
         <thead />
         <tfoot />
         <tbody>
