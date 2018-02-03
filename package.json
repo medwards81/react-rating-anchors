@@ -10,7 +10,7 @@
     "lint": "eslint src --ext .js,.jsx",
     "dev": "webpack-dev-server --progress --colors --host 0.0.0.0 --port 8080",
     "build":
-      "cross-env BUILD_DEV=1 webpack --progress && webpack -p --output-filename react-rating-achors.min.js --progress",
+      "cross-env BUILD_DEV=1 webpack --progress && webpack -p --output-filename react-rating-anchors.min.js --progress",
     "version": "npm run build && git add -A lib",
     "postversion": "git push && git push --tags",
     "gh-pages": "./scripts/gh-pages.sh"

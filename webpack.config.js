@@ -16,7 +16,7 @@ var banner =
 
 module.exports = {
   entry: {
-    'react-rating-achors': './src/react-rating-achors.js'
+    'react-rating-anchors': './src/react-rating-anchors.js'
   },
   output: {
     // Output the bundled file.
@@ -24,7 +24,7 @@ module.exports = {
     // Use the name specified in the entry key as name for the bundle file.
     filename: '[name].js',
     // Export as a Universal Module Definition library.
-    library: 'ReactRating',
+    library: 'ReactRatingAnchors',
     libraryTarget: 'umd',
     // The modified bundle is served from memory at the relative path
     // specified in publicPath.
