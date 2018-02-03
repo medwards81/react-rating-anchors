@@ -163,28 +163,32 @@ class Rating extends React.PureComponent {
 
     return (
       <table cellpadding="0" style={{ borderCollapse: 'collapse' }}>
-        {anchors && (
+        <thead />
+        <tfoot />
+        <tbody>
+          {anchors && (
+            <tr>
+              <td colSpan={`${totalSymbols}`}>
+                <div style={{ textAlign: 'center' }}>
+                  <span style={{ float: 'left' }}>{anchors[0]}</span>
+                  {anchors[1]}
+                  <span style={{ float: 'right' }}>{anchors[2]}</span>
+                </div>
+              </td>
+            </tr>
+          )}
           <tr>
-            <td colSpan={`${totalSymbols}`}>
-              <div style={{ textAlign: 'center' }}>
-                <span style={{ float: 'left' }}>{anchors[0]}</span>
-                {anchors[1]}
-                <span style={{ float: 'right' }}>{anchors[2]}</span>
-              </div>
+            <td colSpan={`${totalSymbols}`} align="center">
+              <span
+                style={{ display: 'inline-block', direction }}
+                onMouseEnter={!readonly ? this.onMouseEnter : noop}
+                onMouseLeave={!readonly ? this.onMouseLeave : noop}
+              >
+                {symbolNodes}
+              </span>
             </td>
           </tr>
-        )}
-        <tr>
-          <td colSpan={`${totalSymbols}`} align="center">
-            <span
-              style={{ display: 'inline-block', direction }}
-              onMouseEnter={!readonly ? this.onMouseEnter : noop}
-              onMouseLeave={!readonly ? this.onMouseLeave : noop}
-            >
-              {symbolNodes}
-            </span>
-          </td>
-        </tr>
+        </tbody>
       </table>
     );
   }
