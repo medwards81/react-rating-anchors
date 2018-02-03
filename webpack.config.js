@@ -1,13 +1,22 @@
 var webpack = require('webpack');
 var PACKAGE = require('./package.json');
-var banner = PACKAGE.name + ' - ' + PACKAGE.version + ' | ' +
-  '(c) 2015, ' + new Date().getFullYear() + '  ' + PACKAGE.author + ' | ' +
-  PACKAGE.license + ' | ' +
+var banner =
+  PACKAGE.name +
+  ' - ' +
+  PACKAGE.version +
+  ' | ' +
+  '(c) 2015, ' +
+  new Date().getFullYear() +
+  '  ' +
+  PACKAGE.author +
+  ' | ' +
+  PACKAGE.license +
+  ' | ' +
   PACKAGE.homepage;
 
 module.exports = {
   entry: {
-    'react-rating': './src/react-rating.js'
+    'react-rating-achors': './src/react-rating-achors.js'
   },
   output: {
     // Output the bundled file.
@@ -29,16 +38,13 @@ module.exports = {
         // Test for js or jsx files.
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loaders: [
-          "babel-loader",
-          "eslint-loader"
-        ]
+        loaders: ['babel-loader', 'eslint-loader']
       }
     ]
   },
   externals: {
     // Don't bundle the 'react' npm package with the component.
-    'react': {
+    react: {
       root: 'React',
       commonjs2: 'react',
       commonjs: 'react',
