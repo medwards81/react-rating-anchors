@@ -170,9 +170,13 @@ class Rating extends React.PureComponent {
             <tr>
               <td colSpan={`${totalSymbols}`}>
                 <div style={{ textAlign: 'center' }}>
-                  <span style={{ float: 'left' }}>{anchors[0]}</span>
-                  {anchors[1]}
-                  <span style={{ float: 'right' }}>{anchors[2]}</span>
+                  <span style={{ float: 'left', marginLeft: '5px' }}>
+                    {anchors[0]}
+                  </span>
+                  <span style={{ marginLeft: '5px' }}>{anchors[1]}</span>
+                  <span style={{ float: 'right', marginRight: '5px' }}>
+                    {anchors[2]}
+                  </span>
                 </div>
               </td>
             </tr>
