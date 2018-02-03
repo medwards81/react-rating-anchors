@@ -140,43 +140,47 @@ class Rating extends React.PureComponent {
       }
 
       symbolNodes.push(
-        <td>
-          <Symbol
-            key={i}
-            index={i}
-            readonly={readonly}
-            inactiveIcon={empty[i % empty.length]}
-            activeIcon={
-              shouldDisplayPlaceholder
-                ? placeholder[i % full.length]
-                : full[i % full.length]
-            }
-            percent={percent}
-            onClick={!readonly ? this.symbolClick : noop}
-            onMouseMove={!readonly ? this.symbolMouseMove : noop}
-            onTouchMove={!readonly ? this.symbolMouseMove : noop}
-            onTouchEnd={!readonly ? this.symbolClick : noop}
-            direction={direction}
-          />
-        </td>
+        <Symbol
+          key={i}
+          index={i}
+          readonly={readonly}
+          inactiveIcon={empty[i % empty.length]}
+          activeIcon={
+            shouldDisplayPlaceholder
+              ? placeholder[i % full.length]
+              : full[i % full.length]
+          }
+          percent={percent}
+          onClick={!readonly ? this.symbolClick : noop}
+          onMouseMove={!readonly ? this.symbolMouseMove : noop}
+          onTouchMove={!readonly ? this.symbolMouseMove : noop}
+          onTouchEnd={!readonly ? this.symbolClick : noop}
+          direction={direction}
+        />
       );
     }
 
     return (
-      <table>
+      <table cellpadding="0" style={{ borderCollapse: 'collapse' }}>
         <tr>
           <td colSpan={`${totalSymbols}`}>
-            <div style={{ textAlign: 'center' }}>Marc</div>
+            <div style={{ textAlign: 'center' }}>
+              <span style={{ float: 'left' }}>{anchors[0]}</span>
+              {ancchors[1]}
+              <span style={{ float: 'right' }}>{anchors[2]}</span>
+            </div>
           </td>
         </tr>
         <tr>
-          <span
-            style={{ display: 'inline-block', direction }}
-            onMouseEnter={!readonly ? this.onMouseEnter : noop}
-            onMouseLeave={!readonly ? this.onMouseLeave : noop}
-          >
-            {symbolNodes}
-          </span>
+          <td colSpan={`${totalSymbols}`} align="center">
+            <span
+              style={{ display: 'inline-block', direction }}
+              onMouseEnter={!readonly ? this.onMouseEnter : noop}
+              onMouseLeave={!readonly ? this.onMouseLeave : noop}
+            >
+              {symbolNodes}
+            </span>
+          </td>
         </tr>
       </table>
     );
