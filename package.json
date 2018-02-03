@@ -1,6 +1,6 @@
 {
   "name": "react-rating-anchors",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description":
     "A rating react component with custom symbols and optinal scale anchors",
   "main": "lib/react-rating-anchors.js",
