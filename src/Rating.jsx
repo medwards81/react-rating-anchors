@@ -173,7 +173,7 @@ class Rating extends React.PureComponent {
                   <span style={{ float: 'left', marginLeft: '5px' }}>
                     {anchors[0]}
                   </span>
-                  <span style={{ marginLeft: '5px' }}>{anchors[1]}</span>
+                  <span style={{ marginLeft: '10px' }}>{anchors[1]}</span>
                   <span style={{ float: 'right', marginRight: '5px' }}>
                     {anchors[2]}
                   </span>

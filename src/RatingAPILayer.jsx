@@ -87,7 +87,7 @@ class RatingAPILayer extends React.PureComponent {
           this.props.placeholderRating
         )}
         readonly={readonly}
-        quiet={quiet}
+        quiet={!anchors.length}
         fractions={fractions}
         direction={direction}
         emptySymbol={emptySymbol}
