@@ -131,7 +131,7 @@ class Rating extends React.PureComponent {
     // The amount of full symbols
     const fullSymbols = Math.floor(renderedValue);
 
-    let currentVal = this.props.start;
+    let currentVal = start;
 
     for (let i = 0; i < totalSymbols; i++) {
       let percent;
