@@ -153,8 +153,12 @@ class Rating extends React.PureComponent {
           }
           percent={percent}
           onClick={!readonly ? this.symbolClick : noop}
-          onMouseMove={!readonly ? this.symbolMouseMove : noop}
-          onTouchMove={!readonly ? this.symbolMouseMove : noop}
+          onMouseMove={
+            !readonly && !anchors.length ? this.symbolMouseMove : noop
+          }
+          onTouchMove={
+            !readonly && !anchors.length ? this.symbolMouseMove : noop
+          }
           onTouchEnd={!readonly ? this.symbolClick : noop}
           direction={direction}
         />
