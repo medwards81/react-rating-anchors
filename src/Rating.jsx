@@ -110,7 +110,8 @@ class Rating extends React.PureComponent {
       placeholderSymbol,
       anchors,
       start,
-      step
+      step,
+      showScaleValue
     } = this.props;
     const { displayValue, interacting } = this.state;
     const symbolNodes = [];
@@ -149,7 +150,6 @@ class Rating extends React.PureComponent {
       symbolNodes.push(
         <span key={i} style={{ display: 'inline-block', textAlign: 'center' }}>
           <Symbol
-            key={i}
             index={i}
             readonly={readonly}
             inactiveIcon={empty[i % empty.length]}
@@ -165,8 +165,12 @@ class Rating extends React.PureComponent {
             onTouchEnd={!readonly ? this.symbolClick : noop}
             direction={direction}
           />
-          <br />
-          <span>{currentVal}</span>
+          {showScaleValue && (
+            <span>
+              <br />
+              <span>{currentVal}</span>
+            </span>
+          )}
         </span>
       );
     }
@@ -268,7 +272,8 @@ Rating.propTypes = typeof __DEV__ !== 'undefined' &&
     ]),
     onClick: PropTypes.func.isRequired,
     onHover: PropTypes.func.isRequired,
-    anchors: PropTypes.array
+    anchors: PropTypes.array,
+    showScaleValue: PropTypes.bool
   };
 
 export default Rating;
