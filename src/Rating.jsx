@@ -140,6 +140,8 @@ class Rating extends React.PureComponent {
         percent = 0;
       }
 
+      console.log(displayValue, renderedValue, i, percent);
+
       symbolNodes.push(
         <Symbol
           key={i}
