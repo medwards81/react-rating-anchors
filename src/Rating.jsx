@@ -144,8 +144,10 @@ class Rating extends React.PureComponent {
         percent = 0;
       }
 
+			currentVal += step;
+
       symbolNodes.push(
-        <div key={i} style={{ display: 'inline', textAlign: 'center' }}>
+        <span key={i} style={{ display: 'inline-block', textAlign: 'center' }}>
           <Symbol
             key={i}
             index={i}
@@ -163,8 +165,9 @@ class Rating extends React.PureComponent {
             onTouchEnd={!readonly ? this.symbolClick : noop}
             direction={direction}
           />
-          <div>{currentVal + step}</div>
-        </div>
+					<br>
+          <span>{currentVal}</span>
+        </span>
       );
     }
 
