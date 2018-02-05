@@ -96,6 +96,8 @@ class RatingAPILayer extends React.PureComponent {
         onClick={this.handleClick}
         onHover={this.handleHover}
         anchors={anchors}
+        start={start}
+        step={step}
       />
     );
   }

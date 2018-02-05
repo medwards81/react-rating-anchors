@@ -108,7 +108,9 @@ class Rating extends React.PureComponent {
       emptySymbol,
       fullSymbol,
       placeholderSymbol,
-      anchors
+      anchors,
+      start,
+      step
     } = this.props;
     const { displayValue, interacting } = this.state;
     const symbolNodes = [];
@@ -129,6 +131,8 @@ class Rating extends React.PureComponent {
     // The amount of full symbols
     const fullSymbols = Math.floor(renderedValue);
 
+    let currentVal = this.props.start;
+
     for (let i = 0; i < totalSymbols; i++) {
       let percent;
       // Calculate each symbol's fullness percentage
@@ -141,23 +145,26 @@ class Rating extends React.PureComponent {
       }
 
       symbolNodes.push(
-        <Symbol
-          key={i}
-          index={i}
-          readonly={readonly}
-          inactiveIcon={empty[i % empty.length]}
-          activeIcon={
-            shouldDisplayPlaceholder
-              ? placeholder[i % full.length]
-              : full[i % full.length]
-          }
-          percent={percent}
-          onClick={!readonly ? this.symbolClick : noop}
-          onMouseMove={!readonly ? this.symbolMouseMove : noop}
-          onTouchMove={!readonly ? this.symbolMouseMove : noop}
-          onTouchEnd={!readonly ? this.symbolClick : noop}
-          direction={direction}
-        />
+        <div key={i} style={{ display: 'inline', textAlign: 'center' }}>
+          <Symbol
+            key={i}
+            index={i}
+            readonly={readonly}
+            inactiveIcon={empty[i % empty.length]}
+            activeIcon={
+              shouldDisplayPlaceholder
+                ? placeholder[i % full.length]
+                : full[i % full.length]
+            }
+            percent={percent}
+            onClick={!readonly ? this.symbolClick : noop}
+            onMouseMove={!readonly ? this.symbolMouseMove : noop}
+            onTouchMove={!readonly ? this.symbolMouseMove : noop}
+            onTouchEnd={!readonly ? this.symbolClick : noop}
+            direction={direction}
+          />
+          <div>{currentVal + step}</div>
+        </div>
       );
     }
 
@@ -166,7 +173,7 @@ class Rating extends React.PureComponent {
         <thead />
         <tfoot />
         <tbody>
-          {anchors.length && (
+          {anchors.length > 0 && (
             <tr>
               <td colSpan={`${totalSymbols}`}>
                 <div style={{ textAlign: 'center' }}>
