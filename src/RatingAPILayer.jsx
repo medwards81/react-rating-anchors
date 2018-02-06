@@ -74,7 +74,7 @@ class RatingAPILayer extends React.PureComponent {
       stop,
       anchors,
       showScaleValue,
-			style
+      style
     } = this.props;
 
     function calculateTotalSymbols(start, stop, step) {
@@ -100,8 +100,8 @@ class RatingAPILayer extends React.PureComponent {
         anchors={anchors}
         start={start}
         step={step}
-        showScaleValue={showScaleValue},
-				style={style}
+        showScaleValue={showScaleValue}
+        style={style}
       />
     );
   }
