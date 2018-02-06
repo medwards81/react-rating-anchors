@@ -171,7 +171,9 @@ class Rating extends React.PureComponent {
           {showScaleValue && (
             <span>
               <br />
-              <span dir="ltr" style={{direction: 'ltr' ...valueStyle }}>{currentVal}</span>
+              <span dir="ltr" style={{ direction: 'ltr', ...valueStyle }}>
+                {currentVal}
+              </span>
             </span>
           )}
         </span>
