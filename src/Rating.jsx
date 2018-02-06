@@ -171,7 +171,7 @@ class Rating extends React.PureComponent {
           {showScaleValue && (
             <span>
               <br />
-              <span style={...valueStyle}>{currentVal}</span>
+              <span style={{ ...valueStyle }}>{currentVal}</span>
             </span>
           )}
         </span>
@@ -187,11 +187,21 @@ class Rating extends React.PureComponent {
             <tr>
               <td colSpan={`${totalSymbols}`}>
                 <div style={{ textAlign: 'center' }}>
-                  <span style={{ float: 'left', marginLeft: '5px', ...scaleStyle }}>
+                  <span
+                    style={{ float: 'left', marginLeft: '5px', ...scaleStyle }}
+                  >
                     {anchors[0]}
                   </span>
-                  <span style={{ marginLeft: '20px', ...scaleStyle }}>{anchors[1]}</span>
-                  <span style={{ float: 'right', marginRight: '5px', ...scaleStyle }}>
+                  <span style={{ marginLeft: '20px', ...scaleStyle }}>
+                    {anchors[1]}
+                  </span>
+                  <span
+                    style={{
+                      float: 'right',
+                      marginRight: '5px',
+                      ...scaleStyle
+                    }}
+                  >
                     {anchors[2]}
                   </span>
                 </div>
@@ -277,9 +287,9 @@ Rating.propTypes = typeof __DEV__ !== 'undefined' &&
     onHover: PropTypes.func.isRequired,
     anchors: PropTypes.array,
     showScaleValue: PropTypes.bool,
-		iconStyle: PropTypes.object,
-		scaleStyle: PropTypes.object,
-		valueStyle: PropTypes.object,
+    iconStyle: PropTypes.object,
+    scaleStyle: PropTypes.object,
+    valueStyle: PropTypes.object
   };
 
 export default Rating;
