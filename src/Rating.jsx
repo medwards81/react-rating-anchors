@@ -111,7 +111,8 @@ class Rating extends React.PureComponent {
       anchors,
       start,
       step,
-      showScaleValue
+      showScaleValue,
+      style
     } = this.props;
     const { displayValue, interacting } = this.state;
     const symbolNodes = [];
@@ -198,7 +199,7 @@ class Rating extends React.PureComponent {
           <tr>
             <td colSpan={`${totalSymbols}`} align="center">
               <span
-                style={{ display: 'inline-block', direction }}
+                style={{ display: 'inline-block', direction, ...style }}
                 onMouseEnter={!readonly ? this.onMouseEnter : noop}
                 onMouseLeave={!readonly ? this.onMouseLeave : noop}
               >

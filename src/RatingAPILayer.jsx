@@ -119,7 +119,8 @@ RatingAPILayer.defaultProps = {
   fullSymbol: Style.full,
   placeholderSymbol: Style.placeholder,
   anchors: [],
-  showScaleValue: false
+  showScaleValue: false,
+  style: {}
 };
 
 // Define propTypes only in development.
@@ -134,6 +135,7 @@ RatingAPILayer.propTypes = typeof __DEV__ !== 'undefined' &&
     quiet: PropTypes.bool,
     fractions: PropTypes.number,
     direction: PropTypes.string,
+    style: PropTypes.object,
     emptySymbol: PropTypes.oneOfType([
       // Array of class names and/or style objects.
       PropTypes.arrayOf(
