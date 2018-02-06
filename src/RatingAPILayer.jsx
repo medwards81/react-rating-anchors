@@ -103,7 +103,7 @@ class RatingAPILayer extends React.PureComponent {
         start={start}
         step={step}
         showScaleValue={showScaleValue}
-        iconStyle={inconStyle}
+        iconStyle={iconStyle}
         scaleStyle={scaleStyle}
         valueStyle={valueStyle}
       />
