@@ -180,6 +180,9 @@ class Rating extends React.PureComponent {
       );
     }
 
+    const middleScaleStyle =
+      direction === 'ltr' ? { marginLeft: '10px' } : { marginRight: '10px' };
+
     return (
       <table cellPadding="0" style={{ borderCollapse: 'collapse' }}>
         <thead />
@@ -201,9 +204,9 @@ class Rating extends React.PureComponent {
                   </span>
                   <span
                     style={{
-                      marginLeft: '20px',
                       verticalAlign: 'top',
-                      ...scaleStyle
+                      ...scaleStyle,
+                      ...middleScaleStyle
                     }}
                   >
                     {anchors[1]}
