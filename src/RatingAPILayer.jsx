@@ -74,7 +74,9 @@ class RatingAPILayer extends React.PureComponent {
       stop,
       anchors,
       showScaleValue,
-      style
+      iconStyle,
+      scaleStyle,
+      valueStyle
     } = this.props;
 
     function calculateTotalSymbols(start, stop, step) {
@@ -101,7 +103,9 @@ class RatingAPILayer extends React.PureComponent {
         start={start}
         step={step}
         showScaleValue={showScaleValue}
-        style={style}
+        iconStyle={inconStyle}
+        scaleStyle={scaleStyle}
+        valueStyle={valueStyle}
       />
     );
   }
@@ -122,7 +126,9 @@ RatingAPILayer.defaultProps = {
   placeholderSymbol: Style.placeholder,
   anchors: [],
   showScaleValue: false,
-  style: {}
+  iconStyle: {},
+  scaleStyle: {},
+  valueStyle: {}
 };
 
 // Define propTypes only in development.
@@ -137,7 +143,9 @@ RatingAPILayer.propTypes = typeof __DEV__ !== 'undefined' &&
     quiet: PropTypes.bool,
     fractions: PropTypes.number,
     direction: PropTypes.string,
-    style: PropTypes.object,
+    iconStyle: PropTypes.object,
+    scaleStyle: PropTypes.object,
+    valueStyle: PropTypes.object,
     emptySymbol: PropTypes.oneOfType([
       // Array of class names and/or style objects.
       PropTypes.arrayOf(

@@ -112,7 +112,9 @@ class Rating extends React.PureComponent {
       start,
       step,
       showScaleValue,
-      style
+      iconStyle,
+      scaleStyle,
+      valueStyle
     } = this.props;
     const { displayValue, interacting } = this.state;
     const symbolNodes = [];
@@ -169,7 +171,7 @@ class Rating extends React.PureComponent {
           {showScaleValue && (
             <span>
               <br />
-              <span>{currentVal}</span>
+              <span style={...valueStyle}>{currentVal}</span>
             </span>
           )}
         </span>
@@ -185,11 +187,11 @@ class Rating extends React.PureComponent {
             <tr>
               <td colSpan={`${totalSymbols}`}>
                 <div style={{ textAlign: 'center' }}>
-                  <span style={{ float: 'left', marginLeft: '5px' }}>
+                  <span style={{ float: 'left', marginLeft: '5px', ...scaleStyle }}>
                     {anchors[0]}
                   </span>
-                  <span style={{ marginLeft: '20px' }}>{anchors[1]}</span>
-                  <span style={{ float: 'right', marginRight: '5px' }}>
+                  <span style={{ marginLeft: '20px', ...scaleStyle }}>{anchors[1]}</span>
+                  <span style={{ float: 'right', marginRight: '5px', ...scaleStyle }}>
                     {anchors[2]}
                   </span>
                 </div>
@@ -199,7 +201,7 @@ class Rating extends React.PureComponent {
           <tr>
             <td colSpan={`${totalSymbols}`} align="center">
               <span
-                style={{ display: 'inline-block', direction, ...style }}
+                style={{ display: 'inline-block', direction, ...iconStyle }}
                 onMouseEnter={!readonly ? this.onMouseEnter : noop}
                 onMouseLeave={!readonly ? this.onMouseLeave : noop}
               >
@@ -274,7 +276,10 @@ Rating.propTypes = typeof __DEV__ !== 'undefined' &&
     onClick: PropTypes.func.isRequired,
     onHover: PropTypes.func.isRequired,
     anchors: PropTypes.array,
-    showScaleValue: PropTypes.bool
+    showScaleValue: PropTypes.bool,
+		iconStyle: PropTypes.object,
+		scaleStyle: PropTypes.object,
+		valueStyle: PropTypes.object,
   };
 
 export default Rating;
