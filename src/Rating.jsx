@@ -182,7 +182,7 @@ class Rating extends React.PureComponent {
     }
 
     const middleScaleStyle =
-      direction === 'ltr' ? { marginLeft: '10px' } : { marginRight: '10px' };
+      direction === 'ltr' ? { marginLeft: '0px' } : { marginRight: '0px' };
 
     return (
       <table cellPadding="0" style={{ borderCollapse: 'collapse' }}>
