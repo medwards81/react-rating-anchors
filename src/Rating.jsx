@@ -142,7 +142,7 @@ class Rating extends React.PureComponent {
       // Calculate each symbol's fullness percentage
       if (i - fullSymbols < 0) {
         //percent = anchors.length ? (i === fullSymbols - 1 ? 100 : 0) : 100;
-        perecent = 100;
+        percent = 100;
       } else if (i - fullSymbols === 0) {
         percent = (renderedValue - i) * 100;
       } else {
