@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import noop from './utils/noop';
-import Symbol from './RatingSymbol';
+import React from "react";
+import PropTypes from "prop-types";
+import noop from "./utils/noop";
+import Symbol from "./RatingSymbol";
 
 class Rating extends React.PureComponent {
   constructor(props) {
@@ -81,15 +81,15 @@ class Rating extends React.PureComponent {
 
   calculateHoverPercentage(event) {
     const clientX =
-      event.nativeEvent.type.indexOf('touch') > -1
-        ? event.nativeEvent.type.indexOf('touchend') > -1
+      event.nativeEvent.type.indexOf("touch") > -1
+        ? event.nativeEvent.type.indexOf("touchend") > -1
           ? event.changedTouches[0].clientX
           : event.touches[0].clientX
         : event.clientX;
 
     const targetRect = event.target.getBoundingClientRect();
     const delta =
-      this.props.direction === 'rtl'
+      this.props.direction === "rtl"
         ? targetRect.right - clientX
         : clientX - targetRect.left;
 
@@ -152,7 +152,11 @@ class Rating extends React.PureComponent {
       currentVal += step;
 
       symbolNodes.push(
-        <span key={i} style={{ display: 'inline-block', textAlign: 'center' }}>
+        <span
+          key={i}
+          className="rating-anchor-wrapper-symbol-wrapper"
+          style={{ display: "inline-block", textAlign: "center" }}
+        >
           <Symbol
             index={i}
             readonly={readonly}
@@ -168,11 +172,16 @@ class Rating extends React.PureComponent {
             onTouchMove={!readonly ? this.symbolMouseMove : noop}
             onTouchEnd={!readonly ? this.symbolClick : noop}
             direction={direction}
+            className="rating-anchor-symbol"
           />
           {showScaleValue && (
-            <span>
+            <span className="rating-anchor-val-wrapper">
               <br />
-              <span dir="ltr" style={{ direction: 'ltr', ...valueStyle }}>
+              <span
+                dir="ltr"
+                className="rating-anchor-val"
+                style={{ direction: "ltr", ...valueStyle }}
+              >
                 {currentVal}
               </span>
             </span>
@@ -182,30 +191,36 @@ class Rating extends React.PureComponent {
     }
 
     const middleScaleStyle =
-      direction === 'ltr' ? { marginLeft: '0px' } : { marginRight: '0px' };
+      direction === "ltr" ? { marginLeft: "0px" } : { marginRight: "0px" };
 
     return (
-      <table cellPadding="0" style={{ borderCollapse: 'collapse' }}>
+      <table
+        className="tbl-rating-anchors"
+        cellPadding="0"
+        style={{ borderCollapse: "collapse" }}
+      >
         <thead />
         <tfoot />
         <tbody>
           {anchors.length > 0 && (
             <tr>
-              <td colSpan={`${totalSymbols}`}>
-                <div style={{ textAlign: 'center' }}>
+              <td colSpan={`${totalSymbols}`} className="rating-scale-wrapper">
+                <div style={{ textAlign: "center" }}>
                   <span
+                    className="rating-scale-left"
                     style={{
-                      float: 'left',
-                      marginLeft: '5px',
-                      verticalAlign: 'top',
+                      float: "left",
+                      marginLeft: "5px",
+                      verticalAlign: "top",
                       ...scaleStyle
                     }}
                   >
                     {anchors[0]}
                   </span>
                   <span
+                    className="rating-scale-middle"
                     style={{
-                      verticalAlign: 'top',
+                      verticalAlign: "top",
                       ...scaleStyle,
                       ...middleScaleStyle
                     }}
@@ -213,10 +228,11 @@ class Rating extends React.PureComponent {
                     {anchors[1]}
                   </span>
                   <span
+                    className="rating-scale-right"
                     style={{
-                      float: 'right',
-                      marginRight: '5px',
-                      verticalAlign: 'top',
+                      float: "right",
+                      marginRight: "5px",
+                      verticalAlign: "top",
                       ...scaleStyle
                     }}
                   >
@@ -229,7 +245,8 @@ class Rating extends React.PureComponent {
           <tr>
             <td colSpan={`${totalSymbols}`} align="center">
               <span
-                style={{ display: 'inline-block', direction, ...iconStyle }}
+                className="rating-anchors-wrapper"
+                style={{ display: "inline-block", direction, ...iconStyle }}
                 onMouseEnter={!readonly ? this.onMouseEnter : noop}
                 onMouseLeave={!readonly ? this.onMouseLeave : noop}
               >
@@ -244,7 +261,7 @@ class Rating extends React.PureComponent {
 }
 
 // Define propTypes only in development.
-Rating.propTypes = typeof __DEV__ !== 'undefined' &&
+Rating.propTypes = typeof __DEV__ !== "undefined" &&
   __DEV__ && {
     totalSymbols: PropTypes.number.isRequired,
     value: PropTypes.number.isRequired, // Always >= 0
