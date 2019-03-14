@@ -154,7 +154,8 @@ class Rating extends React.PureComponent {
       symbolNodes.push(
         <span
           key={i}
-          className="rating-anchor-wrapper-symbol-wrapper"
+          id={`r-${i}`}
+          className="rating-anchor-wrapper"
           style={{ display: "inline-block", textAlign: "center" }}
         >
           <Symbol
@@ -172,7 +173,7 @@ class Rating extends React.PureComponent {
             onTouchMove={!readonly ? this.symbolMouseMove : noop}
             onTouchEnd={!readonly ? this.symbolClick : noop}
             direction={direction}
-            className="rating-anchor-symbol"
+            className="rating-anchor-symbol-wrapper"
           />
           {showScaleValue && (
             <span className="rating-anchor-val-wrapper">
